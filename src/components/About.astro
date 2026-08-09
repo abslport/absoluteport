@@ -1,0 +1,92 @@
+---
+const highlights = [
+  {
+    icon: '🏪',
+    title: 'Store Operation',
+    description: 'Mengelola operasional store harian, inventory control, dan memastikan pengalaman pelanggan terbaik.'
+  },
+  {
+    icon: '🔧',
+    title: 'Service Advisor',
+    description: 'Menangani komunikasi pelanggan untuk layanan servis kendaraan, estimasi biaya, dan quality control.'
+  },
+  {
+    icon: '⚙️',
+    title: 'Stamping Press Operator',
+    description: 'Mengoperasikan mesin press stamping, quality control produk, dan menjaga keselamatan kerja.'
+  },
+];
+---
+
+<section id="about" class="py-24 px-4 relative">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="glass px-4 py-2 text-sm text-primary-light mb-4 inline-block">Tentang Saya</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+        Kenali <span class="gradient-text">Saya Lebih Dekat</span>
+      </h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">Saya adalah profesional dengan pengalaman di berbagai industri, berdedikasi untuk memberikan hasil terbaik dalam setiap tanggung jawab.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <!-- Bio card -->
+      <div class="glass-dark p-8 relative overflow-hidden card-hover">
+        <div class="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+        <h3 class="font-display text-2xl font-semibold mb-6 relative">Profil Singkat</h3>
+        <div class="space-y-4 text-slate-300 leading-relaxed relative">
+          <p>
+            Saya <span class="text-white font-semibold">Bayu Andika</span>, seorang profesional multi-talenta dengan keahlian di
+            <span class="text-white">operasional store</span>, <span class="text-white">service advisor otomotif</span>, dan
+            <span class="text-white">operator mesin stamping press</span>.
+          </p>
+          <p>
+            Dengan kemampuan analitis yang kuat, perhatian terhadap detail, dan dedikasi tinggi,
+            saya selalu berusaha memberikan yang terbaik dalam setiap pekerjaan.
+          </p>
+          <p>
+            Di luar pekerjaan, saya aktif mengembangkan diri melalui berbagai proyek
+            dan pembelajaran berkelanjutan.
+          </p>
+        </div>
+
+        <!-- Personal info grid -->
+        <div class="grid grid-cols-2 gap-4 mt-8 relative">
+          <div class="glass p-4 text-center">
+            <div class="text-sm text-slate-400">Lokasi</div>
+            <div class="font-semibold">Indonesia</div>
+          </div>
+          <div class="glass p-4 text-center">
+            <div class="text-sm text-slate-400">Bahasa</div>
+            <div class="font-semibold">Indonesia, Inggris</div>
+          </div>
+          <div class="glass p-4 text-center">
+            <div class="text-sm text-slate-400">Status</div>
+            <div class="font-semibold text-emerald-400">Aktif</div>
+          </div>
+          <div class="glass p-4 text-center">
+            <div class="text-sm text-slate-400">Industri</div>
+            <div class="font-semibold">Retail, Otomotif, Manufaktur</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Role highlights -->
+      <div class="space-y-6">
+        {highlights.map((item, i) => (
+          <div class="glass-dark p-6 card-hover flex gap-5 group" style={{ transitionDelay: `${i * 100}ms` }}>
+            <div class="w-14 h-14 shrink-0 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+              {item.icon}
+            </div>
+            <div>
+              <h4 class="font-display font-semibold text-lg mb-2 group-hover:text-primary-light transition-colors">
+                {item.title}
+              </h4>
+              <p class="text-slate-400 text-sm leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
