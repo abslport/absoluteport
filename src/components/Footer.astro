@@ -1,0 +1,42 @@
+---
+const socials = [
+  { name: 'GitHub', url: 'https://github.com/bayz-dik', icon: '💻' },
+  { name: 'Instagram', url: 'https://instagram.com/bayydka', icon: '📸' },
+  { name: 'Email', url: 'mailto:bayuandk4@gmail.com', icon: '📧' },
+  { name: 'WhatsApp', url: 'https://wa.me/6287881820662', icon: '📱' },
+];
+---
+
+<footer class="py-12 px-4 mt-16">
+  <div class="max-w-6xl mx-auto">
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center font-display font-bold text-white">
+          BA
+        </div>
+        <span class="font-display font-semibold gradient-text">Bayu Andika</span>
+      </div>
+
+      <!-- Social links -->
+      <div class="flex items-center gap-4">
+        {socials.map(social => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all"
+            title={social.name}
+          >
+            <span class="text-lg">{social.icon}</span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-sm text-slate-500">
+        © {new Date().getFullYear()} Bayu Andika. Dibuat dengan 💜
+      </div>
+    </div>
+  </div>
+</footer>
