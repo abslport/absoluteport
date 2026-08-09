@@ -1,50 +1,286 @@
-<!-- Hero utama -->
-<header class="hero">
-  <div class="hero-content">
-    <span class="hero-badge">DKV Designer Portfolio</span>
-    <h1 class="hero-title">Nama Anda</h1>
-    <p class="hero-subtitle">Creative Director & Visual Designer</p>
-    
-    <div class="hero-cards">
-      <!-- Card 1: Tempat Bekerja -->
-      <div class="work-card">
-        <h3>🏢 Tempat Bekerja</h3>
-        <ul>
-          <li>Creative Studio XYZ</li>
-          <li>Brand Agency ABC</li>
-          <li>Freelance Designer</li>
-        </ul>
-      </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio DKV | Creative Designer</title>
+    <!-- Outfit Font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-dot"></span>
+                <span class="logo-text">DKA</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-primary">Hire Me</a>
+            </div>
+        </div>
+    </nav>
 
-      <!-- Card 2: Pengalaman -->
-      <div class="exp-card">
-        <h3>💼 Pengalaman</h3>
-        <ul>
-          <li>5+ Tahun Desain Grafis</li>
-          <li>20+ Project Branding</li>
-          <li>3+ Tahun Motion Design</li>
-        </ul>
-      </div>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="hero-bg-animation">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-greeting">Halo, saya 👋</p>
+                <h1 class="hero-title">
+                    <span class="text-gradient">Desainer DKV</span><br>
+                    Kreatif & Animator
+                </h1>
+                <p class="hero-subtitle">
+                    Saya adalah desainer komunikasi visual yang berfokus pada
+                    <strong>animasi</strong>, <strong>motion graphics</strong>, dan
+                    <strong>brand identity</strong>. Siap membawa ide Anda menjadi visual yang hidup.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary btn-lg">Lihat Portofolio</a>
+                    <a href="#experience" class="btn btn-outline btn-lg">Pengalaman Saya</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3 class="stat-number">3+</h3>
+                        <p class="stat-label">Tahun Pengalaman</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number">25+</h3>
+                        <p class="stat-label">Proyek Selesai</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number">10+</h3>
+                        <p class="stat-label">Klien Puas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-avatar">
+                        <div class="avatar-circle">
+                            <span class="avatar-initial">DK</span>
+                        </div>
+                        <span class="online-badge"></span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name">Desainer DKV</h3>
+                        <p class="card-role">Motion Designer & Illustrator</p>
+                        <div class="card-tags">
+                            <span class="tag">After Effects</span>
+                            <span class="tag">Illustrator</span>
+                            <span class="tag">Photoshop</span>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#contact" class="btn btn-small">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#experience" class="scroll-indicator">
+            <span class="scroll-arrow">↓</span>
+        </a>
+    </section>
 
-      <!-- Card 3: Skill -->
-      <div class="skill-card">
-        <h3>⚡ Skill</h3>
-        <ul>
-          <li>Adobe Photoshop</li>
-          <li>Illustrator & InDesign</li>
-          <li>After Effects</li>
-          <li>UI/UX Design</li>
-        </ul>
-      </div>
-    </div>
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="section experience-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Pengalaman Kerja</span>
+                <h2 class="section-title">Perjalanan <span class="text-gradient">Karir</span></h2>
+                <p class="section-desc">Pengalaman bekerja yang membentuk kemampuan saya sebagai desainer.</p>
+            </div>
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <h3 class="timeline-role">Senior Motion Designer</h3>
+                            <span class="timeline-date">2023 - Sekarang</span>
+                        </div>
+                        <h4 class="timeline-company">Studio Kreatif Nusantara</h4>
+                        <p class="timeline-desc">
+                            Memimpin tim animasi untuk proyek iklan digital, video explainer,
+                            dan konten sosial media untuk brand-brand nasional.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <h3 class="timeline-role">UI/UX & Brand Designer</h3>
+                            <span class="timeline-date">2021 - 2023</span>
+                        </div>
+                        <h4 class="timeline-company">Digital Agency Maju</h4>
+                        <p class="timeline-desc">
+                            Merancang brand identity, logo, dan antarmuka aplikasi
+                            mobile & web untuk berbagai klien startup.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <h3 class="timeline-role">Junior Graphic Designer</h3>
+                            <span class="timeline-date">2020 - 2021</span>
+                        </div>
+                        <h4 class="timeline-company">Creative Studio Kreatif</h4>
+                        <p class="timeline-desc">
+                            Membuat desain grafis untuk keperluan marketing, sosial media,
+                            dan materi promosi cetak maupun digital.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Sosial Media -->
-    <div class="social-links">
-      <a href="#">🔗 LinkedIn</a>
-      <a href="#">🐦 Twitter</a>
-      <a href="#">📸 Instagram</a>
-      <a href="#">🎨 Behance</a>
-      <a href="#">💻 Dribbble</a>
-    </div>
-  </div>
-</header>
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="section skills-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Keahlian</span>
+                <h2 class="section-title">Skill & <span class="text-gradient">Kompetensi</span></h2>
+                <p class="section-desc">Kemampuan teknis dan kreatif yang saya kuasai.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🎬</div>
+                    <h3 class="skill-name">Motion Graphics</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="90%"></div>
+                    </div>
+                    <span class="skill-percent">90%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">✏️</div>
+                    <h3 class="skill-name">Illustration</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="85%"></div>
+                    </div>
+                    <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-name">Brand Identity</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="80%"></div>
+                    </div>
+                    <span class="skill-percent">80%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🖥️</div>
+                    <h3 class="skill-name">UI/UX Design</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="75%"></div>
+                    </div>
+                    <span class="skill-percent">75%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📱</div>
+                    <h3 class="skill-name">Sosial Media Design</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="88%"></div>
+                    </div>
+                    <span class="skill-percent">88%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎥</div>
+                    <h3 class="skill-name">Video Editing</h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="70%"></div>
+                    </div>
+                    <span class="skill-percent">70%</span>
+                </div>
+            </div>
+            <div class="software-tools">
+                <h3 class="tools-title">Tools yang Saya Gunakan</h3>
+                <div class="tools-list">
+                    <span class="tool-chip">Adobe After Effects</span>
+                    <span class="tool-chip">Adobe Illustrator</span>
+                    <span class="tool-chip">Adobe Photoshop</span>
+                    <span class="tool-chip">Figma</span>
+                    <span class="tool-chip">Blender</span>
+                    <span class="tool-chip">Premiere Pro</span>
+                    <span class="tool-chip">DaVinci Resolve</span>
+                    <span class="tool-chip">Cinema 4D</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / SOCIAL MEDIA SECTION -->
+    <section id="contact" class="section contact-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Hubungi Saya</span>
+                <h2 class="section-title">Let's <span class="text-gradient">Connect!</span></h2>
+                <p class="section-desc">Tertarik bekerja sama? Mari terhubung melalui media sosial berikut.</p>
+            </div>
+            <div class="social-media-grid">
+                <a href="https://www.behance.net/" target="_blank" class="social-card">
+                    <div class="social-icon">🔵</div>
+                    <h3 class="social-name">Behance</h3>
+                    <p class="social-handle">@desain.dkv</p>
+                    <span class="social-link">Lihat Portofolio →</span>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="social-card">
+                    <div class="social-icon">📷</div>
+                    <h3 class="social-name">Instagram</h3>
+                    <p class="social-handle">@desain.dkv</p>
+                    <span class="social-link">Ikuti Saya →</span>
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank" class="social-card">
+                    <div class="social-icon">💼</div>
+                    <h3 class="social-name">LinkedIn</h3>
+                    <p class="social-handle">Desainer DKV</p>
+                    <span class="social-link">Connect →</span>
+                </a>
+                <a href="https://www.dribbble.com/" target="_blank" class="social-card">
+                    <div class="social-icon">🏀</div>
+                    <h3 class="social-name">Dribbble</h3>
+                    <p class="social-handle">@desain.dkv</p>
+                    <span class="social-link">Lihat Desain →</span>
+                </a>
+                <a href="https://www.youtube.com/" target="_blank" class="social-card">
+                    <div class="social-icon">▶️</div>
+                    <h3 class="social-name">YouTube</h3>
+                    <p class="social-handle">Desainer DKV</p>
+                    <span class="social-link">Tonton Video →</span>
+                </a>
+                <a href="mailto:desainer.dkv@gmail.com" class="social-card">
+                    <div class="social-icon">✉️</div>
+                    <h3 class="social-name">Email</h3>
+                    <p class="social-handle">desainer.dkv@gmail.com</p>
+                    <span class="social-link">Kirim Email →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">© 2025 Desainer DKV. Dibuat dengan ❤️ menggunakan Outfit Font & warna khas.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
