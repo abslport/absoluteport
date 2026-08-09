@@ -1,0 +1,103 @@
+---
+const skillGroups = [
+  {
+    title: '🧰 Operational & Management',
+    skills: [
+      { name: 'Store Management', level: 90, icon: '🏪' },
+      { name: 'Inventory Control', level: 85, icon: '📦' },
+      { name: 'Team Leadership', level: 80, icon: '👥' },
+      { name: 'Customer Service', level: 95, icon: '🤝' },
+      { name: 'Reporting & Analisis', level: 85, icon: '📊' },
+    ]
+  },
+  {
+    title: '🔧 Otomotif & Servis',
+    skills: [
+      { name: 'Diagnostik Kendaraan', level: 88, icon: '🔍' },
+      { name: 'Estimasi Biaya Servis', level: 90, icon: '💰' },
+      { name: 'Quality Control', level: 85, icon: '✅' },
+      { name: 'Maintenance Planning', level: 82, icon: '📋' },
+      { name: 'Service Documentation', level: 88, icon: '📝' },
+    ]
+  },
+  {
+    title: '⚙️ Manufaktur & Teknik',
+    skills: [
+      { name: 'Stamping Press Operation', level: 92, icon: '🏭' },
+      { name: 'Mesin Press Setting', level: 85, icon: '🔩' },
+      { name: 'K3 / Safety Management', level: 95, icon: '🛡️' },
+      { name: 'Tooling & Die', level: 80, icon: '🛠️' },
+      { name: 'Lean Manufacturing', level: 78, icon: '📈' },
+    ]
+  },
+  {
+    title: '💻 Technical & Digital',
+    skills: [
+      { name: 'HTML / CSS / JavaScript', level: 80, icon: '🌐' },
+      { name: 'MS Office Suite', level: 90, icon: '📱' },
+      { name: 'Data Entry & Management', level: 92, icon: '🗄️' },
+      { name: 'Problem Solving', level: 88, icon: '🧩' },
+      { name: 'Adaptability', level: 95, icon: '🔄' },
+    ]
+  },
+];
+---
+
+<section id="skills" class="py-24 px-4">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="glass px-4 py-2 text-sm text-primary-light mb-4 inline-block">Keahlian</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+        Skill & <span class="gradient-text">Kompetensi</span>
+      </h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">Beragam keahlian yang saya kuasai di berbagai bidang industri.</p>
+    </div>
+
+    <!-- Skills grid -->
+    <div class="grid md:grid-cols-2 gap-8">
+      {skillGroups.map(group => (
+        <div class="glass-dark p-8 card-hover">
+          <h3 class="font-display text-xl font-semibold mb-8">{group.title}</h3>
+          <div class="space-y-6">
+            {group.skills.map(skill => (
+              <div class="group">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-slate-300 flex items-center gap-2">
+                    <span class="text-lg">{skill.icon}</span>
+                    {skill.name}
+                  </span>
+                  <span class="text-sm text-primary-light font-semibold">{skill.level}%</span>
+                </div>
+                <!-- Skill bar -->
+                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    class="skill-bar h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000"
+                    style={{ width: '0%', '--target': `${skill.level}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animate skill bars on scroll into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+          setTimeout(() => {
+            bar.style.width = bar.style.getPropertyValue('--target');
+          }, 100);
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  document.querySelectorAll('.glass-dark').forEach(card => observer.observe(card));
+</script>
