@@ -1,0 +1,80 @@
+---
+const stats = [
+  { value: '3+', label: 'Profesi Utama' },
+  { value: '5+', label: 'Proyek Selesai' },
+  { value: '4+', label: 'Tahun Pengalaman' },
+  { value: '100%', label: 'Dedikasi' },
+];
+---
+
+<section id="home" class="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16">
+  <!-- Parallax floating orbs -->
+  <div class="parallax absolute top-1/4 left-10 w-24 h-24 rounded-full bg-primary/30 blur-3xl animate-glow" data-speed="0.2"></div>
+  <div class="parallax absolute bottom-1/4 right-10 w-32 h-32 rounded-full bg-accent/30 blur-3xl animate-glow" data-speed="-0.3" style="animation-delay: 1.5s"></div>
+  <div class="parallax absolute top-1/2 left-1/2 w-40 h-40 rounded-full bg-purple-500/20 blur-4xl animate-glow" data-speed="0.1"></div>
+
+  <!-- Badge -->
+  <div class="glass px-4 py-2 mb-6 flex items-center gap-2 animate-float">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span class="text-sm text-slate-300">Tersedia untuk Peluang Baru</span>
+  </div>
+
+  <!-- Main title -->
+  <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-center leading-tight mb-6">
+    <span class="block">Halo, Saya</span>
+    <span class="block gradient-text">Bayu Andika</span>
+  </h1>
+
+  <!-- Roles -->
+  <div class="flex flex-wrap justify-center gap-3 mb-8">
+    {['Store Operation', 'Service Advisor', 'Stamping Press Operator'].map(role => (
+      <span class="glass px-4 py-2 text-sm md:text-base text-slate-200">
+        ⚡ {role}
+      </span>
+    ))}
+  </div>
+
+  <!-- Tagline -->
+  <p class="text-slate-400 max-w-2xl text-center mb-10 text-lg leading-relaxed">
+    Profesional multi-skilled dengan keahlian di bidang <span class="text-white font-medium">operasional store</span>,
+    <span class="text-white font-medium">layanan servis otomotif</span>, dan
+    <span class="text-white font-medium">operasi mesin press stamping</span>.
+  </p>
+
+  <!-- CTA Buttons -->
+  <div class="flex flex-wrap justify-center gap-4 mb-16">
+    <a href="#projects" class="btn-glow">Lihat Proyek Saya</a>
+    <a href="#contact" class="glass px-6 py-3 rounded-xl text-white font-semibold hover:bg-white/20 transition-all">
+      Hubungi Saya
+    </a>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 w-full max-w-4xl">
+    {stats.map(stat => (
+      <div class="glass p-6 text-center card-hover">
+        <div class="font-display text-3xl md:text-4xl font-bold gradient-text mb-2">{stat.value}</div>
+        <div class="text-sm text-slate-400">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Scroll indicator -->
+  <a href="#about" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-400 hover:text-white transition-colors">
+    <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </a>
+</section>
+
+<script>
+  // Parallax scroll effect
+  const layers = document.querySelectorAll('.parallax');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    layers.forEach(layer => {
+      const speed = parseFloat(layer.dataset.speed) || 0.2;
+      layer.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+  });
+</script>
