@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-body bg-midnight text-white antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary text-white;
+  }
+}
+
+@layer components {
+  /* Glassmorphism - efek blur seperti iPhone */
+  .glass {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl;
+  }
+  
+  .glass-dark {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-light via-primary to-accent;
+    background-size: 200% auto;
+    animation: gradient-x 8s ease infinite;
+  }
+
+  /* Tombol glow */
+  .btn-glow {
+    @apply relative inline-flex items-center justify-center px-6 py-3 rounded-xl 
+           bg-gradient-to-r from-primary to-accent text-white font-semibold
+           transition-all duration-300 transform hover:scale-105;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 60px rgba(34, 211, 238, 0.2);
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 80px rgba(34, 211, 238, 0.4);
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-midnight;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-primary to-accent rounded-full;
+  }
+
+  /* Parallax layers */
+  .parallax-layer {
+    @apply will-change-transform;
+  }
+  }
