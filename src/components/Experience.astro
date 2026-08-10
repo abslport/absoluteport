@@ -1,94 +1,62 @@
 ---
-const experiences = [
-  {
-    role: 'Stamping Press Operator',
-    company: 'Manufaktur Industry',
-    period: '2022 - Sekarang',
-    description: 'Mengoperasikan mesin press stamping dengan presisi tinggi, memastikan kualitas produk sesuai standar, dan menjaga keselamatan kerja.',
-    achievements: [
-      'Mencapai target produksi 98% setiap bulannya',
-      'Mengurangi defect rate sebesar 25% melalui quality control yang ketat',
-      'Dipercaya untuk training operator baru',
-    ],
-    icon: '⚙️',
-  },
-  {
-    role: 'Service Advisor',
-    company: 'Otomotif & Servis',
-    period: '2020 - 2022',
-    description: 'Menangani komunikasi dengan pelanggan, memberikan rekomendasi servis, dan mengelola jadwal pekerjaan bengkel.',
-    achievements: [
-      'Meningkatkan customer satisfaction score hingga 4.8/5',
-      'Mengelola lebih dari 50 pelanggan per minggu',
-      'Mengoptimalkan proses booking servis hingga 30% lebih efisien',
-    ],
-    icon: '🔧',
-  },
-  {
-    role: 'Store Operation',
-    company: 'Retail & Store Management',
-    period: '2018 - 2020',
-    description: 'Mengelola operasional store harian, inventory control, dan memastikan pengalaman belanja pelanggan terbaik.',
-    achievements: [
-      'Meningkatkan penjualan store sebesar 15% dalam satu tahun',
-      'Mengelola inventory dengan akurasi 99%',
-      'Memimpin tim store dengan 10+ anggota',
-    ],
-    icon: '🏪',
-  },
-];
+// Experience timeline section
 ---
 
-<section id="experience" class="py-24 px-4">
-  <div class="max-w-5xl mx-auto">
-    <!-- Section Header -->
-    <div class="text-center mb-16">
-      <span class="glass px-4 py-2 text-sm text-primary-light mb-4 inline-block">Pengalaman</span>
-      <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
-        Jejak <span class="gradient-text">Karir Saya</span>
-      </h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">Perjalanan profesional yang membentuk saya menjadi pribadi yang adaptif dan berdedikasi.</p>
-    </div>
+<section id="experience" class="py-20 md:py-28 bg-white/50 dark:bg-dark/50 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="section-title" data-reveal>Pengalaman & Posisi</h2>
 
-    <!-- Timeline -->
-    <div class="relative">
-      <!-- Vertical line -->
-      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary to-accent opacity-30"></div>
+    <div class="relative max-w-3xl mx-auto">
+      <!-- Timeline line -->
+      <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500 via-purple-500 to-cyan-500"></div>
 
-      <div class="space-y-12">
-        {experiences.map((exp, i) => (
-          <div class={`relative flex flex-col md:flex-row gap-6 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-            <!-- Timeline dot -->
-            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-accent shadow-lg shadow-primary/50"></div>
-
-            <div class="md:w-1/2 ml-10 md:ml-0">
-              <div class={`glass-dark p-8 card-hover ${i % 2 === 0 ? 'md:mr-6' : 'md:ml-6'}`}>
-                <div class="flex items-center gap-3 mb-4">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-2xl">
-                    {exp.icon}
-                  </div>
-                  <div>
-                    <h3 class="font-display font-semibold text-lg">{exp.role}</h3>
-                    <p class="text-sm text-primary-light">{exp.company}</p>
-                  </div>
-                </div>
-
-                <div class="text-xs text-slate-400 mb-3">📅 {exp.period}</div>
-
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">{exp.description}</p>
-
-                <ul class="space-y-2">
-                  {exp.achievements.map(achv => (
-                    <li class="flex items-start gap-2 text-sm text-slate-300">
-                      <span class="text-emerald-400 mt-1 shrink-0">✓</span>
-                      {achv}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+      <!-- Experience items -->
+      <div data-reveal class="relative pl-20 mb-12">
+        <div class="absolute left-4 top-4 w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white shadow-lg">
+          <span class="text-sm">🏪</span>
+        </div>
+        <div class="glass-card rounded-2xl p-6 hover:transform hover:translate-x-2 transition-all duration-300">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-bold">Store Operation</h3>
+            <span class="text-xs text-gray-400">Aktif</span>
           </div>
-        ))}
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            Mengelola operasional harian store, memastikan SOP berjalan dengan baik, 
+            mengoptimalkan inventory, dan memberikan pelayanan terbaik kepada customer.
+          </p>
+        </div>
+      </div>
+
+      <div data-reveal-delay="100" class="relative pl-20 mb-12">
+        <div class="absolute left-4 top-4 w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg">
+          <span class="text-sm">🔧</span>
+        </div>
+        <div class="glass-card rounded-2xl p-6 hover:transform hover:translate-x-2 transition-all duration-300">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-bold">Service Advisor</h3>
+            <span class="text-xs text-gray-400">Aktif</span>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            Memberikan konsultasi teknis kepada pelanggan, melakukan diagnosa kendaraan, 
+            merencanakan jadwal maintenance, dan mengelola proses servis hingga selesai.
+          </p>
+        </div>
+      </div>
+
+      <div data-reveal-delay="200" class="relative pl-20">
+        <div class="absolute left-4 top-4 w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white shadow-lg">
+          <span class="text-sm">🏭</span>
+        </div>
+        <div class="glass-card rounded-2xl p-6 hover:transform hover:translate-x-2 transition-all duration-300">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-bold">Stamping Press Operator</h3>
+            <span class="text-xs text-gray-400">Aktif</span>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            Mengoperasikan mesin stamping press dengan presisi, melakukan quality control 
+            terhadap produk, menjaga standar keselamatan kerja, dan mengoptimalkan proses produksi.
+          </p>
+        </div>
       </div>
     </div>
   </div>
