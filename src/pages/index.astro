@@ -8,11 +8,14 @@ import Projects from '../components/Projects.astro';
 import Experience from '../components/Experience.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import ParticleBackground from '../components/ParticleBackground.astro';
 ---
 
-<Layout title="Bayu Andika | Portofolio Profesional">
+<Layout>
+  <ParticleBackground />
   <Navbar />
-  <main>
+  
+  <main class="relative z-10">
     <Hero />
     <About />
     <Skills />
@@ -20,5 +23,80 @@ import Footer from '../components/Footer.astro';
     <Experience />
     <Contact />
   </main>
+
   <Footer />
+
+  <!-- Global styles & scroll reveal animation -->
+  <style is:global>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      transition: all 0.3s ease;
+    }
+    .dark .glass-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      margin: 1rem auto 0;
+      background: linear-gradient(135deg, #6366f1, #a855f7, #22d3ee);
+      border-radius: 2px;
+    }
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    [data-reveal].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-reveal-delay] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition-delay: 0.2s;
+    }
+    [data-reveal-delay].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    ::selection {
+      background: rgba(99, 102, 241, 0.3);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <!-- Scroll reveal script -->
+  <script>
+    const revealElements = document.querySelectorAll('[data-reveal], [data-reveal-delay]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => observer.observe(el));
+  </script>
 </Layout>
