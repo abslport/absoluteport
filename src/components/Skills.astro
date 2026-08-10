@@ -1,103 +1,107 @@
 ---
-const skillGroups = [
-  {
-    title: '🧰 Operational & Management',
-    skills: [
-      { name: 'Store Management', level: 90, icon: '🏪' },
-      { name: 'Inventory Control', level: 85, icon: '📦' },
-      { name: 'Team Leadership', level: 80, icon: '👥' },
-      { name: 'Customer Service', level: 95, icon: '🤝' },
-      { name: 'Reporting & Analisis', level: 85, icon: '📊' },
-    ]
-  },
-  {
-    title: '🔧 Otomotif & Servis',
-    skills: [
-      { name: 'Diagnostik Kendaraan', level: 88, icon: '🔍' },
-      { name: 'Estimasi Biaya Servis', level: 90, icon: '💰' },
-      { name: 'Quality Control', level: 85, icon: '✅' },
-      { name: 'Maintenance Planning', level: 82, icon: '📋' },
-      { name: 'Service Documentation', level: 88, icon: '📝' },
-    ]
-  },
-  {
-    title: '⚙️ Manufaktur & Teknik',
-    skills: [
-      { name: 'Stamping Press Operation', level: 92, icon: '🏭' },
-      { name: 'Mesin Press Setting', level: 85, icon: '🔩' },
-      { name: 'K3 / Safety Management', level: 95, icon: '🛡️' },
-      { name: 'Tooling & Die', level: 80, icon: '🛠️' },
-      { name: 'Lean Manufacturing', level: 78, icon: '📈' },
-    ]
-  },
-  {
-    title: '💻 Technical & Digital',
-    skills: [
-      { name: 'HTML / CSS / JavaScript', level: 80, icon: '🌐' },
-      { name: 'MS Office Suite', level: 90, icon: '📱' },
-      { name: 'Data Entry & Management', level: 92, icon: '🗄️' },
-      { name: 'Problem Solving', level: 88, icon: '🧩' },
-      { name: 'Adaptability', level: 95, icon: '🔄' },
-    ]
-  },
-];
+// Skills section dengan filter & animasi
 ---
 
-<section id="skills" class="py-24 px-4">
-  <div class="max-w-6xl mx-auto">
-    <!-- Section Header -->
-    <div class="text-center mb-16">
-      <span class="glass px-4 py-2 text-sm text-primary-light mb-4 inline-block">Keahlian</span>
-      <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
-        Skill & <span class="gradient-text">Kompetensi</span>
-      </h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">Beragam keahlian yang saya kuasai di berbagai bidang industri.</p>
-    </div>
+<section id="skills" class="py-20 md:py-28 bg-white/50 dark:bg-dark/50 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="section-title" data-reveal>Keahlian Saya</h2>
 
-    <!-- Skills grid -->
-    <div class="grid md:grid-cols-2 gap-8">
-      {skillGroups.map(group => (
-        <div class="glass-dark p-8 card-hover">
-          <h3 class="font-display text-xl font-semibold mb-8">{group.title}</h3>
-          <div class="space-y-6">
-            {group.skills.map(skill => (
-              <div class="group">
-                <div class="flex justify-between items-center mb-2">
-                  <span class="text-slate-300 flex items-center gap-2">
-                    <span class="text-lg">{skill.icon}</span>
-                    {skill.name}
-                  </span>
-                  <span class="text-sm text-primary-light font-semibold">{skill.level}%</span>
-                </div>
-                <!-- Skill bar -->
-                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                  <div
-                    class="skill-bar h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000"
-                    style={{ width: '0%', '--target': `${skill.level}%` }}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Store Operation -->
+      <div data-reveal class="skill-card glass-card rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-3xl">🏪</span>
+          <span class="px-3 py-1 text-xs font-medium bg-indigo-500/10 text-indigo-500 rounded-full">Store Operation</span>
         </div>
-      ))}
+        <h3 class="text-lg font-bold mb-3">Manajemen Operasional</h3>
+        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li>✓ SOP & Standarisasi Proses</li>
+          <li>✓ Manajemen Inventori</li>
+          <li>✓ Digitalisasi Operasional</li>
+          <li>✓ Customer Service Excellence</li>
+          <li>✓ Laporan & Analisis Operasional</li>
+        </ul>
+      </div>
+
+      <!-- Service Advisor -->
+      <div data-reveal-delay="100" class="skill-card glass-card rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-3xl">🔧</span>
+          <span class="px-3 py-1 text-xs font-medium bg-purple-500/10 text-purple-500 rounded-full">Service Advisor</span>
+        </div>
+        <h3 class="text-lg font-bold mb-3">Layanan Servis</h3>
+        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li>✓ Diagnosa Kendaraan</li>
+          <li>✓ Perencanaan Maintenance</li>
+          <li>✓ Konsultasi Teknis</li>
+          <li>✓ Manajemen Estimasi Biaya</li>
+          <li>✓ Komunikasi dengan Pelanggan</li>
+        </ul>
+      </div>
+
+      <!-- Stamping Press -->
+      <div data-reveal-delay="200" class="skill-card glass-card rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-3xl">🏭</span>
+          <span class="px-3 py-1 text-xs font-medium bg-cyan-500/10 text-cyan-500 rounded-full">Stamping Press</span>
+        </div>
+        <h3 class="text-lg font-bold mb-3">Operasi Mesin</h3>
+        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li>✓ Operasi Mesin Press</li>
+          <li>✓ Quality Control Produk</li>
+          <li>✓ Pemeliharaan Preventif</li>
+          <li>✓ Keselamatan Kerja (K3)</li>
+          <li>✓ Optimasi Proses Produksi</li>
+        </ul>
+      </div>
+
+      <!-- Soft Skills -->
+      <div data-reveal class="skill-card glass-card rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-3xl">🤝</span>
+          <span class="px-3 py-1 text-xs font-medium bg-green-500/10 text-green-500 rounded-full">Soft Skills</span>
+        </div>
+        <h3 class="text-lg font-bold mb-3">Kemampuan Personal</h3>
+        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li>✓ Komunikasi Efektif</li>
+          <li>✓ Problem Solving</li>
+          <li>✓ Team Collaboration</li>
+          <li>✓ Time Management</li>
+          <li>✓ Adaptabilitas Tinggi</li>
+        </ul>
+      </div>
+
+      <!-- Tools -->
+      <div data-reveal-delay="100" class="skill-card glass-card rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-3xl">🛠️</span>
+          <span class="px-3 py-1 text-xs font-medium bg-yellow-500/10 text-yellow-500 rounded-full">Tools</span>
+        </div>
+        <h3 class="text-lg font-bold mb-3">Peralatan</h3>
+        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li>✓ Mesin Press & Forming</li>
+          <li>✓ Peralatan Diagnostik</li>
+          <li>✓ Sistem Manajemen Inventori</li>
+          <li>✓ Software Office Suite</li>
+          <li>✓ Tools Analisis Data</li>
+        </ul>
+      </div>
+
+      <!-- Technical -->
+      <div data-reveal-delay="200" class="skill-card glass-card rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-3xl">📊</span>
+          <span class="px-3 py-1 text-xs font-medium bg-red-500/10 text-red-500 rounded-full">Analitik</span>
+        </div>
+        <h3 class="text-lg font-bold mb-3">Kemampuan Analitik</h3>
+        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li>✓ Analisis Data Operasional</li>
+          <li>✓ Laporan Kinerja</li>
+          <li>✓ Identifikasi Area Perbaikan</li>
+          <li>✓ Cost Optimization</li>
+          <li>✓ Risk Assessment</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
-
-<script>
-  // Animate skill bars on scroll into view
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-bar').forEach(bar => {
-          setTimeout(() => {
-            bar.style.width = bar.style.getPropertyValue('--target');
-          }, 100);
-        });
-      }
-    });
-  }, { threshold: 0.2 });
-  
-  document.querySelectorAll('.glass-dark').forEach(card => observer.observe(card));
-</script>
