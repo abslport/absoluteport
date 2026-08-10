@@ -1,86 +1,109 @@
 ---
-// Hero section dengan parallax scroll & 3D effect
+const navLinks = [
+  { name: 'Beranda', href: '#home' },
+  { name: 'Tentang', href: '#about' },
+  { name: 'Keahlian', href: '#skills' },
+  { name: 'Proyek', href: '#projects' },
+  { name: 'Pengalaman', href: '#experience' },
+  { name: 'Kontak', href: '#contact' }
+];
 ---
 
-<section id="home" class="relative min-h-screen flex items-center justify-center pt-16">
-  <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-cyan-500/10 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-cyan-900/20"></div>
-  
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div data-parallax="0.3" class="mb-6">
-      <span class="inline-flex items-center px-4 py-1.5 rounded-full glass-btn text-sm font-medium">
-        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-        Tersedia untuk kolaborasi
-      </span>
-    </div>
-
-    <h1 data-parallax="0.5" class="text-5xl md:text-7xl font-bold mb-6">
-      <span class="gradient-text">Bayu Andika</span>
-    </h1>
-
-    <p data-parallax="0.7" class="text-2xl md:text-4xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
-      <span id="typing-text"></span>
-    </p>
-
-    <p data-parallax="0.9" class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-10">
-      Profesional di bidang <span class="font-semibold text-primary">Store Operation</span>, 
-      <span class="font-semibold text-secondary">Service Advisor</span>, dan 
-      <span class="font-semibold text-accent">Stamping Press Operator</span>.
-    </p>
-
-    <div data-parallax="1.1" class="flex flex-wrap justify-center gap-4 mb-12">
-      <a href="#projects" class="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/30">
-        Lihat Proyek
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <nav class="max-w-7xl mx-auto px-6 py-4">
+    <div class="glass-strong rounded-2xl px-6 py-3 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-3 group" data-hover>
+        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center font-bold text-white font-display transform group-hover:rotate-6 transition-transform duration-300">
+          BA
+        </div>
+        <span class="font-display text-lg font-semibold gradient-text">Bayu Andika</span>
       </a>
-      <a href="#contact" class="px-8 py-3 rounded-xl glass-btn font-semibold hover:bg-white/20 transition-all transform hover:scale-105">
-        Hubungi Saya
-      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center gap-8">
+        {navLinks.map(link => (
+          <a 
+            href={link.href} 
+            class="relative text-sm text-white/70 hover:text-white transition-colors duration-300 group"
+            data-hover
+          >
+            {link.name}
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 gradient-bg transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA + Mobile Menu -->
+      <div class="flex items-center gap-4">
+        <a 
+          href="#contact"
+          class="hidden lg:inline-flex px-6 py-2.5 rounded-xl gradient-bg text-white font-medium text-sm hover:scale-105 transition-transform duration-300"
+          data-hover
+        >
+          Hire Me
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-lg glass flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
+          <span class="w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-5 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div data-parallax="1.3" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-      </svg>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-x-6 top-24 glass-strong rounded-2xl p-6 opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
+      <div class="flex flex-col gap-4">
+        {navLinks.map(link => (
+          <a 
+            href={link.href} 
+            class="text-white/70 hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-white/5"
+          >
+            {link.name}
+          </a>
+        ))}
+        <a href="#contact" class="mt-4 px-6 py-3 rounded-xl gradient-bg text-white text-center font-medium">
+          Hire Me
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </nav>
+</header>
 
 <script>
-  // Typing effect
-  const roles = ['Store Operation Specialist', 'Service Advisor', 'Stamping Press Operator', 'Problem Solver', 'Team Player'];
-  const typingText = document.getElementById('typing-text');
-  let roleIndex = 0, charIndex = 0, isDeleting = false;
-
-  function type() {
-    const currentRole = roles[roleIndex];
-    if (isDeleting) {
-      typingText.textContent = currentRole.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typingText.textContent = currentRole.substring(0, charIndex + 1);
-      charIndex++;
-    }
-
-    let speed = isDeleting ? 50 : 100;
-    if (!isDeleting && charIndex === currentRole.length) {
-      speed = 2000;
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % roles.length;
-      speed = 500;
-    }
-    setTimeout(type, speed);
-  }
-  type();
-
-  // Parallax scroll effect
-  const parallaxElements = document.querySelectorAll('[data-parallax]');
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    parallaxElements.forEach((el) => {
-      const speed = parseFloat(el.dataset.parallax);
-      el.style.transform = `translateY(${scrollY * speed * -0.1}px)`;
+    if (window.scrollY > 50) {
+      navbar.style.background = 'rgba(3, 0, 20, 0.8)';
+      navbar.style.backdropFilter = 'blur(20px)';
+      navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+    } else {
+      navbar.style.background = 'transparent';
+      navbar.style.backdropFilter = 'none';
+      navbar.style.borderBottom = 'none';
+    }
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let isOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+    isOpen = !isOpen;
+    mobileMenu.classList.toggle('opacity-0', !isOpen);
+    mobileMenu.classList.toggle('pointer-events-none', !isOpen);
+    mobileMenu.classList.toggle('translate-y-4', !isOpen);
+  });
+
+  // Close menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      isOpen = false;
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
     });
   });
 </script>
