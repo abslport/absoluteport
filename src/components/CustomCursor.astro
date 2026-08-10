@@ -1,0 +1,46 @@
+---
+// Custom cursor effect
+---
+
+<div id="cursor-dot" class="hidden md:block fixed w-2 h-2 bg-indigo-500 rounded-full pointer-events-none z-[100] mix-blend-difference"></div>
+<div id="cursor-ring" class="hidden md:block fixed w-8 h-8 border-2 border-indigo-400/50 rounded-full pointer-events-none z-[100] mix-blend-difference transition-all duration-200"></div>
+
+<script>
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX - 4 + 'px';
+    dot.style.top = mouseY - 4 + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    ring.style.left = ringX - 16 + 'px';
+    ring.style.top = ringY - 16 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover effect on interactive elements
+  const interactiveElements = document.querySelectorAll('a, button, input, textarea');
+  interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '48px';
+      ring.style.height = '48px';
+      ring.style.borderColor = 'rgba(168, 85, 247, 0.6)';
+      ring.style.left = mouseX - 24 + 'px';
+      ring.style.top = mouseY - 24 + 'px';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '32px';
+      ring.style.height = '32px';
+      ring.style.borderColor = 'rgba(99, 102, 241, 0.5)';
+    });
+  });
+</script>
