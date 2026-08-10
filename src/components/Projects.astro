@@ -1,26 +1,22 @@
 ---
 import { projects } from '../data/projects';
 
-const categories = ['Semua', 'Manufacturing', 'Retail', 'Otomotif', 'Web', 'Management'];
+// Get unique categories
+const categories = ['Semua', ...new Set(projects.map(p => p.category))];
 ---
 
-<section id="projects" class="py-24 px-4">
-  <div class="max-w-6xl mx-auto">
-    <!-- Section Header -->
-    <div class="text-center mb-16">
-      <span class="glass px-4 py-2 text-sm text-primary-light mb-4 inline-block">Proyek Saya</span>
-      <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
-        Karya <span class="gradient-text">Terbaik Saya</span>
-      </h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">Kumpulan proyek yang saya kerjakan, mencerminkan dedikasi dan keterampilan saya.</p>
-    </div>
+<section id="projects" class="py-20 md:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="section-title" data-reveal>Proyek Saya</h2>
 
     <!-- Filter buttons -->
-    <div id="filters" class="flex flex-wrap justify-center gap-3 mb-12">
-      {categories.map(cat => (
-        <button
-          data-filter={cat}
-          class="filter-btn glass px-4 py-2 text-sm text-slate-300 hover:text-white transition-all hover:border-primary/50"
+    <div data-reveal class="flex flex-wrap justify-center gap-3 mb-12">
+      {categories.map((cat, i) => (
+        <button 
+          class={`filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            i === 0 ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white' : 'glass-btn'
+          }`}
+          data-category={cat}
         >
           {cat}
         </button>
@@ -28,65 +24,51 @@ const categories = ['Semua', 'Manufacturing', 'Retail', 'Otomotif', 'Web', 'Mana
     </div>
 
     <!-- Projects grid -->
-    <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map(project => (
-        <article
-          class="project-card glass-dark p-6 card-hover group relative overflow-hidden"
-          data-categories={project.category.join(',')}
+    <div id="projects-grid" class="grid md:grid-cols-2 gap-8">
+      {projects.map((project, index) => (
+        <article 
+          class="project-card glass-card rounded-2xl overflow-hidden group" 
+          data-category={project.category}
+          data-reveal-delay={index * 100}
         >
-          <!-- Featured badge -->
-          {project.featured && (
-            <span class="absolute top-4 right-4 bg-gradient-to-r from-primary to-accent px-3 py-1 rounded-full text-xs font-semibold z-10">
-              ⭐ Featured
-            </span>
-          )}
-
-          <!-- Project image placeholder -->
-          <div class="w-full h-40 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center mb-5 overflow-hidden group-hover:scale-105 transition-transform duration-500">
-            <div class="text-6xl opacity-60 group-hover:opacity-100 transition-opacity">🚀</div>
+          <div class="relative h-56 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-cyan-500/10 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-6xl opacity-20 group-hover:opacity-40 transition-opacity">🚀</span>
+            </div>
+            <div class="absolute top-4 right-4">
+              {project.featured && (
+                <span class="px-3 py-1 text-xs font-medium bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 rounded-full backdrop-blur-sm">
+                  ⭐ Featured
+                </span>
+              )}
+            </div>
           </div>
-
-          <h3 class="font-display font-semibold text-xl mb-2 group-hover:text-primary-light transition-colors">
-            {project.title}
-          </h3>
-
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-3">
-            {project.description}
-          </p>
-
-          <!-- Tech tags -->
-          <div class="flex flex-wrap gap-2 mb-4">
-            {project.tech.map(tech => (
-              <span class="text-xs px-2 py-1 rounded-lg bg-primary/10 text-primary-light">{tech}</span>
-            ))}
-          </div>
-
-          <!-- Links -->
-          <div class="flex items-center gap-3 mt-auto">
-            <a
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xl font-bold">{project.title}</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-500">{project.category}</span>
+            </div>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.tech.map(tech => (
+                <span key={tech} class="px-2 py-1 text-xs rounded-md bg-white/50 dark:bg-white/10 border border-white/20 dark:border-white/10">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <a 
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-sm text-slate-300 hover:text-white flex items-center gap-1 group-hover:gap-2 transition-all"
+              class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
               </svg>
-              GitHub
+              Lihat di GitHub
             </a>
-            {project.demo && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-sm text-slate-300 hover:text-white flex items-center gap-1 transition-all"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                </svg>
-                Demo
-              </a>
-            )}
           </div>
         </article>
       ))}
@@ -95,42 +77,31 @@ const categories = ['Semua', 'Manufacturing', 'Retail', 'Otomotif', 'Web', 'Mana
 </section>
 
 <script>
-  // Project filtering
+  // Project filter functionality
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
-  
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Update active button style
-      filterBtns.forEach(b => b.classList.remove('border-primary', 'text-white'));
-      btn.classList.add('border-primary', 'text-white');
+      const category = btn.dataset.category;
       
-      const filter = btn.dataset.filter;
-      
+      // Update active button styles
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-gradient-to-r', 'from-indigo-500', 'to-purple-500', 'text-white');
+        b.classList.add('glass-btn');
+      });
+      btn.classList.add('bg-gradient-to-r', 'from-indigo-500', 'to-purple-500', 'text-white');
+      btn.classList.remove('glass-btn');
+
+      // Filter projects
       projectCards.forEach(card => {
-        const categories = card.dataset.categories.split(',');
-        const shouldShow = filter === 'Semua' || categories.includes(filter);
-        
-        if (shouldShow) {
-          card.style.display = 'block';
-          card.style.animation = 'fadeIn 0.5s ease forwards';
-        } else {
-          card.style.display = 'none';
+        const cardCategory = card.dataset.category;
+        const show = category === 'Semua' || cardCategory === category;
+        card.style.display = show ? 'block' : 'none';
+        if (show) {
+          card.style.animation = 'fadeIn 0.5s ease-in-out';
         }
       });
     });
   });
 </script>
-
-<style>
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
