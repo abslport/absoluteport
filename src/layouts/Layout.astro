@@ -1,30 +1,72 @@
 ---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '../styles/global.css';
+import CustomCursor from '../components/Effects/CustomCursor.astro';
+import ParticleBackground from '../components/Effects/ParticleBackground.astro';
+
 interface Props {
   title?: string;
   description?: string;
 }
-const { title = 'Bayu Andika - Portfolio', description = 'Portfolio profesional Bayu Andika' } = Astro.props;
+
+const { title = 'Bayu Andika | Portfolio', description = 'Store Operation, Service Advisor & Stamping Press Operator' } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="dark">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Bayu Andika" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-    <script>
-      // Dark mode initialization
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-      document.documentElement.classList.toggle('dark', initialTheme === 'dark');
-      localStorage.setItem('theme', initialTheme);
-    </script>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
   </head>
-  <body class="bg-white dark:bg-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 overflow-x-hidden">
+  <body class="bg-[#030014] text-white antialiased overflow-x-hidden">
+    <CustomCursor />
+    <ParticleBackground />
     <slot />
+    <script>
+      // Theme toggle logic
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark');
+        });
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Preloader
+      window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.remove(), 500);
+          }, 300);
+        }
+      });
+    </script>
   </body>
 </html>
