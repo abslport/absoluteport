@@ -1,83 +1,58 @@
 ---
-const navLinks = [
-  { href: '#home', label: 'Beranda' },
-  { href: '#about', label: 'Tentang' },
-  { href: '#skills', label: 'Keahlian' },
-  { href: '#projects', label: 'Proyek' },
-  { href: '#experience', label: 'Pengalaman' },
-  { href: '#contact', label: 'Kontak' },
-];
+// Navigation bar dengan glassmorphism effect
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-  <nav class="glass-dark max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-    <!-- Logo -->
-    <a href="#home" class="flex items-center gap-3 group">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center font-display font-bold text-white text-lg shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
-        BA
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/30 dark:bg-dark/30 border-b border-white/20 dark:border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="#home" class="text-xl font-bold gradient-text">BAYU.</a>
+      
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="nav-link hover:text-primary transition-colors">Home</a>
+        <a href="#about" class="nav-link hover:text-primary transition-colors">Tentang</a>
+        <a href="#skills" class="nav-link hover:text-primary transition-colors">Keahlian</a>
+        <a href="#projects" class="nav-link hover:text-primary transition-colors">Proyek</a>
+        <a href="#contact" class="nav-link hover:text-primary transition-colors">Kontak</a>
       </div>
-      <span class="font-display font-semibold text-lg gradient-text">Bayu Andika</span>
-    </a>
 
-    <!-- Desktop Nav -->
-    <div class="hidden md:flex items-center gap-8">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class="text-slate-300 hover:text-white transition-colors relative group"
-        >
-          {link.label}
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></span>
-        </a>
-      ))}
-    </div>
-
-    <!-- Mobile Menu Button -->
-    <button
-      id="mobile-menu-btn"
-      class="md:hidden text-white p-2 rounded-lg hover:bg-white/10"
-      aria-label="Menu"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden mt-2">
-    <div class="glass-dark mx-auto max-w-6xl px-6 py-4 flex flex-col gap-4">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class="text-slate-300 hover:text-white transition-colors py-2"
-        >
-          {link.label}
-        </a>
-      ))}
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="glass-btn p-2 rounded-lg" aria-label="Toggle dark mode">
+          <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
-</header>
+</nav>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-
-  // Close menu on link click
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => menu.classList.add('hidden'));
-  });
-
-  // Navbar blur on scroll
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.style.background = 'rgba(10, 10, 26, 0.8)';
-      header.style.backdropFilter = 'blur(20px)';
-    } else {
-      header.style.background = 'transparent';
-      header.style.backdropFilter = 'none';
-    }
+  const toggleBtn = document.getElementById('theme-toggle');
+  toggleBtn.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 </script>
+
+<style is:global>
+  .glass-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+  }
+  .glass-btn:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #6366f1, #a855f7, #22d3ee);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 6s ease infinite;
+  }
+</style>
