@@ -8,17 +8,19 @@ import Projects from '../components/Projects.astro';
 import Experience from '../components/Experience.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-// 1. Tambahkan import komponen WebGL/React kamu di sini
-import generated-background from '../components/generated-background.tsx';
+import GeneratedBackground from '../components/generated-background.tsx';
 ---
 
 <Layout>
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <generated-background client:only="react" />
+  </div>
+
   <!-- Preloader -->
   <div id="preloader">
     <div class="text-center">
       <div class="w-16 h-16 mx-auto mb-4 rounded-full gradient-bg animate-spin-slow"></div>
       <p class="font-display font-semibold text-lg">Memuat...</p>
-      <generated-background client:only="react" />
     </div>
   </div>
 
