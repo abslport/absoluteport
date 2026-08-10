@@ -1,29 +1,30 @@
 ---
-import '../styles/global.css';
-import Background3D from '../components/Background3D.astro';
-
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
 }
-
-const { title, description = 'Portofolio profesional Bayu Andika' } = Astro.props;
+const { title = 'Bayu Andika - Portfolio', description = 'Portfolio profesional Bayu Andika' } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#0a0a1a" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <script>
+      // Dark mode initialization
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+      localStorage.setItem('theme', initialTheme);
+    </script>
   </head>
-  <body class="bg-midnight text-white overflow-x-hidden">
-    <Background3D />
-    <div class="relative z-10">
-      <slot />
-    </div>
+  <body class="bg-white dark:bg-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 overflow-x-hidden">
+    <slot />
   </body>
 </html>
