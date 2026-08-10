@@ -1,68 +1,103 @@
 ---
-// 3D Particle Background menggunakan Three.js
 ---
 
-<canvas id="particle-canvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+<canvas id="particles-canvas" class="fixed inset-0 w-full h-full pointer-events-none"></canvas>
 
 <script>
-  import * as THREE from 'three';
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
 
-  const canvas = document.getElementById('particle-canvas');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-  // Particles
-  const particlesGeometry = new THREE.BufferGeometry();
-  const count = 2000;
-  const positions = new Float32Array(count * 3);
-  const colors = new Float32Array(count * 3);
+  const particles = [];
+  const particleCount = 80;
 
-  for (let i = 0; i < count * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 50;
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.speedY = (Math.random() - 0.5) * 0.5;
+      this.color = `rgba(${99 + Math.random() * 100}, ${102 + Math.random() * 50}, ${241}, ${Math.random() * 0.5})`;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+
+    draw() {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
 
-  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
 
-  // Points material
-  const material = new THREE.PointsMaterial({
-    size: 0.02,
-    color: '#6366f1',
-    transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending,
-  });
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-  const particles = new THREE.Points(particlesGeometry, material);
-  scene.add(particles);
-
-  camera.position.z = 15;
-
-  // Mouse interaction
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
+        if (distance < 150) {
+          ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - distance / 150)})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
 
   function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Mouse interaction
+    const mouseX = typeof window.mouseX !== 'undefined' ? window.mouseX : -1000;
+    const mouseY = typeof window.mouseY !== 'undefined' ? window.mouseY : -1000;
+
+    particles.forEach(p => {
+      const dx = p.x - mouseX;
+      const dy = p.y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120) {
+        p.x += dx * 0.02;
+        p.y += dy * 0.02;
+      }
+    });
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    connectParticles();
     requestAnimationFrame(animate);
-    particles.rotation.x += 0.0005;
-    particles.rotation.y += 0.0005;
-    camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
-    camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
-    camera.lookAt(scene.position);
-    renderer.render(scene, camera);
   }
 
-  // Resize handler
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  animate();
+
+  window.addEventListener('mousemove', (e) => {
+    window.mouseX = e.clientX;
+    window.mouseY = e.clientY;
   });
 
-  animate();
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
 </script>
