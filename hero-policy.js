@@ -1,3 +1,26 @@
+
+export function getLoaderStatus(modelState) {
+  return modelState === 'loading' ? 'LOADING HAND MODEL' : 'PORTFOLIO READY';
+}
+
+export function getHandSurfaceTuning() {
+  return {
+    material: {
+      color: 0x090a0a,
+      roughness: 0.32,
+      metalness: 0.12,
+      clearcoat: 0.55,
+      clearcoatRoughness: 0.25,
+    },
+    lighting: {
+      keyIntensity: 4.2,
+      rimIntensity: 1.35,
+      fillIntensity: 0.16,
+    },
+    exposure: 0.82,
+  };
+}
+
 export function getRendererPixelRatio(devicePixelRatio, viewportWidth) {
   const cap = viewportWidth < 768 ? 1.5 : 2;
   return Math.min(Math.max(devicePixelRatio || 1, 1), cap);

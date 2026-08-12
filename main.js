@@ -5,6 +5,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import {
   getLoaderRevealDelay,
+  getLoaderStatus,
+  getHandSurfaceTuning,
   getModelNormalization,
   getRendererPixelRatio,
   getScrollTuning,
@@ -90,7 +92,7 @@ window.setTimeout(revealPage, LOADER_MAX_MS);
 
 if (!webglSupported || reducedMotion) {
   modelState = 'poster';
-  loaderStatus.textContent = 'STATIC HERO READY';
+  loaderStatus.textContent = getLoaderStatus(modelState);
   revealPage();
 } else {
   bootWebGL();
@@ -107,34 +109,31 @@ function bootWebGL() {
   });
 
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const surfaceTuning = getHandSurfaceTuning();
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = surfaceTuning.exposure;
   renderer.setClearColor(0x000000, 0);
   RectAreaLightUniformsLib.init();
 
   const handGroup = new THREE.Group();
   scene.add(handGroup);
 
-  const key = new THREE.RectAreaLight(0xf2f7ff, 5.4, 5.0, 5.0);
+  const key = new THREE.RectAreaLight(0xf2f7ff, surfaceTuning.lighting.keyIntensity, 5.0, 5.0);
   key.position.set(-3.2, 4.0, 3.6);
   key.lookAt(0, 0.5, 0);
   scene.add(key);
 
-  const rim = new THREE.DirectionalLight(0xe7f0f6, 1.8);
+  const rim = new THREE.DirectionalLight(0xe7f0f6, surfaceTuning.lighting.rimIntensity);
   rim.position.set(4.2, 2.2, -3.5);
   scene.add(rim);
 
-  const fill = new THREE.DirectionalLight(0xbfc5c7, 0.28);
+  const fill = new THREE.DirectionalLight(0xbfc5c7, surfaceTuning.lighting.fillIntensity);
   fill.position.set(0, -2.5, 4.5);
   scene.add(fill);
 
   camera.position.set(0, 0.1, 6.4);
 
-  const graphiteMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x090a0a,
-    roughness: 0.31,
-    metalness: 0.13,
-    clearcoat: 0.58,
-    clearcoatRoughness: 0.24,
-  });
+  const graphiteMaterial = new THREE.MeshPhysicalMaterial(surfaceTuning.material);
 
   const motionState = {
     scrollYaw: 0,
@@ -282,7 +281,7 @@ function bootWebGL() {
         modelState,
         reducedMotion,
       });
-      loaderStatus.textContent = 'HAND MODEL READY';
+      loaderStatus.textContent = getLoaderStatus(modelState);
       rebuildScrollMotion();
       revealPage();
     },
@@ -291,7 +290,7 @@ function bootWebGL() {
       console.error('Hero hand failed to load:', error);
       modelState = 'failed';
       hero.dataset.renderMode = 'poster';
-      loaderStatus.textContent = 'STATIC HERO READY';
+      loaderStatus.textContent = getLoaderStatus(modelState);
       revealPage();
     }
   );

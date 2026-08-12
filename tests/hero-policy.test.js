@@ -78,3 +78,25 @@ test('desktop scroll tuning remains inside the approved 16 to 22 degree yaw rang
   assert.equal(tuning.finalPitchDeg, -8);
   assert.equal(tuning.finalScale, 1.34);
 });
+
+test('loader status never exposes internal fallback wording', () => {
+  assert.equal(typeof policy.getLoaderStatus, 'function');
+  assert.equal(policy.getLoaderStatus('loading'), 'LOADING HAND MODEL');
+  assert.equal(policy.getLoaderStatus('ready'), 'PORTFOLIO READY');
+  assert.equal(policy.getLoaderStatus('poster'), 'PORTFOLIO READY');
+  assert.equal(policy.getLoaderStatus('failed'), 'PORTFOLIO READY');
+});
+
+test('hand surface tuning stays inside the approved graphite material range', () => {
+  assert.equal(typeof policy.getHandSurfaceTuning, 'function');
+  const tuning = policy.getHandSurfaceTuning();
+
+  assert.equal(tuning.material.color, 0x090a0a);
+  assert.ok(tuning.material.roughness >= 0.26 && tuning.material.roughness <= 0.32);
+  assert.ok(tuning.material.metalness >= 0.12 && tuning.material.metalness <= 0.22);
+  assert.ok(tuning.material.clearcoat >= 0.55 && tuning.material.clearcoat <= 0.70);
+  assert.ok(tuning.material.clearcoatRoughness >= 0.18 && tuning.material.clearcoatRoughness <= 0.25);
+  assert.ok(tuning.lighting.keyIntensity <= 4.5);
+  assert.ok(tuning.lighting.fillIntensity <= 0.18);
+  assert.ok(tuning.exposure <= 0.85);
+});
