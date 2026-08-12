@@ -100,3 +100,24 @@ test('hand surface tuning stays inside the approved graphite material range', ()
   assert.ok(tuning.lighting.fillIntensity <= 0.18);
   assert.ok(tuning.exposure <= 0.85);
 });
+
+test('mobile hand has autonomous idle motion even without pointer input', () => {
+  assert.equal(typeof policy.getIdleHandMotion, 'function');
+  const a = policy.getIdleHandMotion(0.8, 390);
+  const b = policy.getIdleHandMotion(2.4, 390);
+
+  assert.ok(Math.abs(a.yawDeg - b.yawDeg) > 1.5);
+  assert.ok(Math.abs(a.pitchDeg - b.pitchDeg) > 0.8);
+  assert.ok(Math.abs(a.y) <= 0.07 && Math.abs(b.y) <= 0.07);
+  assert.ok(a.scale >= 0.985 && a.scale <= 1.02);
+  assert.ok(b.scale >= 0.985 && b.scale <= 1.02);
+});
+
+test('desktop pointer response is visible but stays controlled', () => {
+  assert.equal(typeof policy.getPointerMotionTuning, 'function');
+  const tuning = policy.getPointerMotionTuning();
+
+  assert.ok(tuning.yawDeg >= 4 && tuning.yawDeg <= 6);
+  assert.ok(tuning.pitchDeg >= 2.5 && tuning.pitchDeg <= 4);
+  assert.ok(tuning.damping >= 0.06 && tuning.damping <= 0.1);
+});

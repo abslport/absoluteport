@@ -21,6 +21,36 @@ export function getHandSurfaceTuning() {
   };
 }
 
+
+export function getPointerMotionTuning() {
+  return {
+    yawDeg: 5,
+    pitchDeg: 3.2,
+    damping: 0.075,
+  };
+}
+
+export function getIdleHandMotion(elapsedSeconds, viewportWidth) {
+  const compact = viewportWidth < 768;
+  const speed = compact ? 0.72 : 0.62;
+  const yawAmplitude = compact ? 5.2 : 3.8;
+  const pitchAmplitude = compact ? 2.8 : 2.0;
+  const rollAmplitude = compact ? 1.6 : 1.2;
+  const floatY = compact ? 0.065 : 0.045;
+  const driftX = compact ? 0.028 : 0.018;
+  const scalePulse = compact ? 0.014 : 0.01;
+  const t = elapsedSeconds * speed;
+
+  return {
+    yawDeg: Math.sin(t * 1.12) * yawAmplitude,
+    pitchDeg: Math.sin(t * 1.3 + 0.3) * pitchAmplitude,
+    rollDeg: Math.sin(t * 0.63 + 0.35) * rollAmplitude,
+    x: Math.cos(t * 0.52 + 0.2) * driftX,
+    y: Math.sin(t * 0.88) * floatY,
+    scale: 1 + Math.sin(t * 0.71 + 0.65) * scalePulse,
+  };
+}
+
 export function getRendererPixelRatio(devicePixelRatio, viewportWidth) {
   const cap = viewportWidth < 768 ? 1.5 : 2;
   return Math.min(Math.max(devicePixelRatio || 1, 1), cap);

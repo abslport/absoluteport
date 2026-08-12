@@ -7,6 +7,8 @@ import {
   getLoaderRevealDelay,
   getLoaderStatus,
   getHandSurfaceTuning,
+  getIdleHandMotion,
+  getPointerMotionTuning,
   getModelNormalization,
   getRendererPixelRatio,
   getScrollTuning,
@@ -147,13 +149,14 @@ function bootWebGL() {
   };
 
   const pointerEnabled = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const pointerTuning = getPointerMotionTuning();
 
   if (pointerEnabled) {
     window.addEventListener('pointermove', (event) => {
       const nx = event.clientX / window.innerWidth - 0.5;
       const ny = event.clientY / window.innerHeight - 0.5;
-      motionState.targetPointerYaw = THREE.MathUtils.degToRad(nx * 3.0);
-      motionState.targetPointerPitch = THREE.MathUtils.degToRad(ny * -2.0);
+      motionState.targetPointerYaw = THREE.MathUtils.degToRad(nx * pointerTuning.yawDeg * 2);
+      motionState.targetPointerPitch = THREE.MathUtils.degToRad(ny * -pointerTuning.pitchDeg * 2);
     }, { passive: true });
   }
 
@@ -302,14 +305,17 @@ function bootWebGL() {
     if (modelState !== 'ready') return;
     if (!shouldRenderFrame(heroVisible, documentVisible)) return;
 
-    motionState.pointerYaw += (motionState.targetPointerYaw - motionState.pointerYaw) * 0.055;
-    motionState.pointerPitch += (motionState.targetPointerPitch - motionState.pointerPitch) * 0.055;
+    motionState.pointerYaw += (motionState.targetPointerYaw - motionState.pointerYaw) * pointerTuning.damping;
+    motionState.pointerPitch += (motionState.targetPointerPitch - motionState.pointerPitch) * pointerTuning.damping;
 
     const elapsed = clock.getElapsedTime();
-    handGroup.position.y = Math.sin(elapsed * 0.55) * 0.025;
-    handGroup.rotation.y = BASE_HAND_YAW + motionState.scrollYaw + motionState.pointerYaw;
-    handGroup.rotation.x = motionState.scrollPitch + motionState.pointerPitch;
-    handGroup.scale.setScalar(motionState.scrollScale);
+    const idle = getIdleHandMotion(elapsed, window.innerWidth);
+    handGroup.position.x = idle.x;
+    handGroup.position.y = idle.y;
+    handGroup.rotation.y = BASE_HAND_YAW + motionState.scrollYaw + motionState.pointerYaw + THREE.MathUtils.degToRad(idle.yawDeg);
+    handGroup.rotation.x = motionState.scrollPitch + motionState.pointerPitch + THREE.MathUtils.degToRad(idle.pitchDeg);
+    handGroup.rotation.z = THREE.MathUtils.degToRad(idle.rollDeg);
+    handGroup.scale.setScalar(motionState.scrollScale * idle.scale);
     camera.position.z = motionState.cameraZ;
     renderer.render(scene, camera);
   }
